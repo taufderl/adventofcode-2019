@@ -119,24 +119,22 @@ func runProgram(programInput []int, noun int, verb int) int {
 	for {
 		debugPrint(IP)
 		debugPrint(program[IP:len(program)])
-		var param1 *int
-		var param2 *int
-		var param3 *int
+		var param1, param2, param3 *int
 		instruction := program[IP] % 100
 		switch instruction {
-		case 1: //ADD
+		case 1: // ADD
 			param1, param2, param3 = getThreeParamters(program, IP)
 			*param3 = *param1 + *param2
 			IP += 4
-		case 2: //MULTIPLY
+		case 2: // MULTIPLY
 			param1, param2, param3 = getThreeParamters(program, IP)
 			*param3 = *param1 * *param2
 			IP += 4
-		case 3: //INPUT
+		case 3: // INPUT
 			param1 = getOneParamter(program, IP)
 			*param1 = readInputStream()
 			IP += 2
-		case 4: //OUTPUT
+		case 4: // OUTPUT
 			param1 = getOneParamter(program, IP)
 			writeOutputStream(*param1)
 			IP += 2
@@ -170,10 +168,10 @@ func runProgram(programInput []int, noun int, verb int) int {
 				*param3 = 0
 			}
 			IP += 4
-		case 99: //HALT
+		case 99: // HALT
 			debugPrint(program[0])
 			return 0
-		default:
+		default: // UNKNOWN OPCODE
 			fmt.Println("Got unknown OPCODE:", instruction)
 			return instruction
 		}
